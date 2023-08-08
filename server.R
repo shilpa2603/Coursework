@@ -1,6 +1,8 @@
 # Load libraries
 library(shiny)
 library(tidyverse)
+library(ggplot2)
+library(plotly) 
 
 # Read in data
 data <- "https://cf-courses-data.s3.us.cloud-object-storage.appdomain.cloud/IBM-DV0151EN-SkillsNetwork/labs/module_4/starter_code/adult.csv"
@@ -22,20 +24,17 @@ shinyServer(function(input, output) {
     data <- read.csv("adult.csv")
     if (input$graph_type == "histogram") {
       # Histogram
-      ggplot(df_country(), aes_string(x = x=input$continous_variable)) +
+      ggplot(df_country(), aes_string(x = input$continuous_variable)) +
         geom_histogram(bins = 30) +  # histogram geom
-        labs(title = paste("Trend of",input$continous_variable),
-         y = "Number of People")  +  # labels
+        labs(y = "Number of People", title = paste("Trend of ", input$continuous_variable))  +  # labels
         facet_wrap(~prediction)    # facet by prediction
     }
     else {
       # Boxplot
-      ggplot(df_country(), aes_string(y = input$continous_variable)) +
+      ggplot(df_country(), aes_string(y = input$continuous_variable)) +
         geom_boxplot() +  # boxplot geom
         coord_flip() +  # flip coordinates
-        labs(title = paste("How", input$continous_variable,"value is spread"),
-          y = "Number of People",
-          x = "Age") +  # labels
+        labs(y = "Number of People", title = paste("Trend of ", input$continuous_variable)) +  # labels
         facet_wrap(~prediction)    # facet by prediction
     }
     
