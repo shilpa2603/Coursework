@@ -1,9 +1,3 @@
-# Load libraries
-library(shiny)
-library(tidyverse)
-categorical_variables = c('age', 'hours_per_week', 'education', 'workclass', 'sex')
-graph_type = c('historgram', 'boxplot')
-
 # Application Layout
 shinyUI(
   fluidPage(
@@ -27,15 +21,16 @@ shinyUI(
     fluidRow(
       column(3, 
              wellPanel(
-               p("Select a continuous variable and graph type (histogram or boxplot) to view on the right."),
-               h3('Explore Adult'),
-               radioButtons("continous_variable",
-                      "Select Continous Variable",
-                       choices = c("age", "hours_per_week")),   # add radio buttons for continuous variables
-               radioButtons("graph_type",
-                       "Select Graph Type",
-                        choices = c("Histogram", "BoxPlot")),# add radio buttons for chart type    # add radio buttons for chart type
-               )
+             p("Select a continuous variable and graph type (histogram or boxplot) to view on the right."),
+               radioButtons(inputId = "graph_type",
+                            label = "Graph Type",
+                            choices = c("histogram", "boxplot"),
+                            selected = "histogram"),             
+               radioButtons(inputId = "continuous_variable",
+                            label = "Variable",
+                            choices = c("age", "hours_per_week"),
+                            selected = "hours_per_week")                 
+                   )
              ),
       column(9, plotOutput("p1"))  # add plot output
     ),
