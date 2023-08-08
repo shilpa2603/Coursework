@@ -22,7 +22,7 @@ shinyServer(function(input, output) {
     data <- read.csv("adult.csv")
     if (input$graph_type == "histogram") {
       # Histogram
-      ggplot(df_country(), aes_string(x = x=input$continous_variable)) +
+      ggplot(df_country(), aes_string(x = input$continous_variable)) +
         geom_histogram(bins = 30) +  # histogram geom
         labs(title = paste("Trend of",input$continous_variable),
          y = "Number of People")  +  # labels
